@@ -11,6 +11,7 @@ export class LandingpageComponent implements OnInit {
   public showLoading: boolean = true;
   private subscription: Subscription = new Subscription();
   public storiesIds: any[] = [];
+  public stories: any[] = [];
 
   constructor(
     private landingpageService: LandingpageService
@@ -32,7 +33,7 @@ export class LandingpageComponent implements OnInit {
         });
         forkJoin(arr).subscribe((arrResp) => {
           arrResp.sort((a, b) => (a['score'] > b['score']) ? 1 : -1);
-          console.log(arrResp);
+          this.stories = [...arrResp];
           this.showLoading = false;
         });
       },
