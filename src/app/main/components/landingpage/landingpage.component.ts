@@ -11,7 +11,8 @@ export class LandingpageComponent implements OnInit {
   public showLoading: boolean = true;
   private subscription: Subscription = new Subscription();
   public storiesIds: any[] = [];
-  public stories: any[] = [];
+  public topStories: any[] = [];
+  public cardStories: any[] = [{time: 0}, {time: 0}, {time: 0}, {time: 0}, {time: 0}, {time: 0}, {time: 0}];
 
   constructor(
     private landingpageService: LandingpageService
@@ -33,7 +34,11 @@ export class LandingpageComponent implements OnInit {
         });
         forkJoin(arr).subscribe((arrResp) => {
           arrResp.sort((a, b) => (a['score'] > b['score']) ? 1 : -1);
-          this.stories = [...arrResp];
+          arrResp.forEach(function (value, i) {
+            value['image'] = 'assets/images/' + i + '.jpg';
+          });
+          this.topStories = [...arrResp].slice(0, 3);
+          this.cardStories = [...arrResp].slice(Math.max([...arrResp].length - 7, 0));
           this.showLoading = false;
         });
       },

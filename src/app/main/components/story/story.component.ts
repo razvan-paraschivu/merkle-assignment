@@ -15,6 +15,9 @@ export class StoryComponent implements OnInit {
   @Input()
   public loading: boolean = true;
 
+  @Input()
+  public type: string;
+
   private subscription: Subscription = new Subscription();
   public showLoading: boolean = true;
   public userData: any;
@@ -42,10 +45,18 @@ export class StoryComponent implements OnInit {
     ));
   }
 
-  private convertTimestamp(timestamp){
+  private convertTimestamp(timestamp): void {
     this.storyData.time = new Date(timestamp * 1000).toLocaleDateString('en-GB', {
       day: '2-digit', month: 'short', year: 'numeric'
     })
+  }
+
+  public goToStory(url: string): void {
+    window.open(url, "_blank");
+  }
+
+  ngOnDestroy():void {
+    this.subscription.unsubscribe();
   }
 
 }

@@ -1,8 +1,47 @@
-<div >
-    <div>{{storyData.score}}</div>
-    <div>{{storyData.title}}</div>
-    <div>{{storyData.url}}</div>
-    <div>{{storyData.by}}</div>
-    <div>{{userData?.karma}}</div>
-    <div>{{storyData.time}}</div>
+<div *ngIf="type == 'top'" [ngClass]="loading? 'shimmer-background': ''" class="top-news" (click)="goToStory(storyData.url)">
+    <div class="score">
+        <img class="icon" src="assets/icons/star.svg"/>
+        <div>{{storyData.score}}</div>
+    </div>
+    <div class="image">
+        <img [src]="storyData.image"/>
+    </div>
+    <div class="content">
+        <div class="title">{{storyData.title}}</div>
+        <div class="user-date">
+            <div class="user">
+                <img class="icon" src="assets/icons/user-white.svg"/>
+                <div>{{storyData.by}}</div>
+                <img class="icon left-margin" src="assets/icons/karma-white.svg"/>
+                <div>{{userData?.karma}}</div>
+            </div>
+            <div class="date">
+                <img class="icon left-margin" src="assets/icons/calendar-white.svg"/>
+                <div>{{storyData.time}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="type == 'card'" [ngClass]="loading? 'shimmer-background': ''" class="card">
+    <div class="score">
+        <img class="icon" src="assets/icons/star.svg"/>
+        <div>{{storyData.score}}</div>
+    </div>
+    <div class="image">
+        <img *ngIf= "storyData.image" [src]="storyData.image"/>
+    </div>
+    <div class="title">{{storyData.title}}</div>
+    <div class="url" *ngIf="storyData.url">
+        <img class="icon" src="assets/icons/link.svg"/>
+        <a [href]="storyData.url" target="_blank">{{storyData.url}}</a>
+    </div>
+    <div class="user">
+        <img class="icon" src="assets/icons/user.svg"/>
+        <div>{{storyData.by}}</div>
+        <img class="icon left-margin" src="assets/icons/karma.svg"/>
+        <div>{{userData?.karma}}</div>
+        <img class="icon left-margin" src="assets/icons/calendar.svg"/>
+        <div>{{storyData.time}}</div>
+    </div>
 </div>

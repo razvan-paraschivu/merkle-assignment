@@ -1,1 +1,51 @@
-<app-story *ngFor="let story of stories" [storyData] = "story" [loading] = "showLoading"></app-story>
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+    <img
+        width="40"
+        alt="Hacker News logo"
+        src="assets/icons/logo.webp"
+    />
+    <span>Hacker News</span>
+</div>
+  
+<div class="content" role="main">
+
+    <div class="menu">
+        <div class="menu-item active">Latest news</div>
+        <div class="menu-item">Worldwide</div>
+        <div class="menu-item">Social</div>
+        <div class="menu-item">Politics</div>
+    </div>
+
+    <div class="top-container" [ngClass]="showLoading? 'shimmer-background': ''">
+        <div class="left">
+            <app-story *ngIf="topStories.length > 0" [storyData] = "topStories[0]" [loading] = "showLoading" [type] = "'top'"></app-story>
+        </div>
+        <div class="right">
+            <app-story *ngIf="topStories.length > 0" [storyData] = "topStories[1]" [loading] = "showLoading" [type] = "'top'"></app-story>
+            <app-story *ngIf="topStories.length > 0" [storyData] = "topStories[2]" [loading] = "showLoading" [type] = "'top'"></app-story>
+        </div>
+    </div>
+
+    <div class="header">Editor's pick</div>
+
+    <div class="card-container">
+        <app-story *ngFor="let story of cardStories" [storyData] = "story" [loading] = "showLoading" [type] = "'card'"></app-story>
+    </div>
+  
+    <!-- Footer -->
+    <footer class="social-icons-container">
+        <div class="social-icons">
+            <img src="assets/icons/twitter.svg"/>
+        </div>
+        <div class="social-icons">
+            <img src="assets/icons/facebook.svg"/>
+        </div>
+        <div class="social-icons">
+            <img src="assets/icons/instagram.svg"/>
+        </div>
+        <div class="social-icons">
+            <img src="assets/icons/youtube.svg"/>
+        </div>
+    </footer>
+</div>
